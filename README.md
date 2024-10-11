@@ -43,7 +43,7 @@ git clone https://github.com/svdC1/PyGptInterface.git
  ```
  - ### Wrapper Only
 ```bash
-pip install -r requeriments-wrapper.txt
+pip install -r requirements-wrapper.txt
 ```
 
 ## Run GUI
