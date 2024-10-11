@@ -27,9 +27,13 @@
 
 ## OpenAI API Key: 
 
-### The user's OpenAI API Key is read locally from a `.env` file using the `python-dotenv` library. In the .env file, the key should be specified by assigning it to a variable called `OPENAI_API_KEY`.
+### The user's OpenAI API Key is read locally from a `.env` file using the `python-dotenv` library. In the .env file, the key should be specified by assigning it to a variable called `OPENAI_API_KEY`. *Make sure the .env file is located in the same directory as 'eel_app.py' (Manual Setup) or PyGptInstaller.exe (Downloading from releases)*
 
-## Setup
+## Windows
+### There is a packaged distribution for windows (using [pyinstaller](https://github.com/pyinstaller/pyinstaller)) available in the *releases* section
+
+
+## Manual Setup
 
 ### 1. Clone this repo
 ```bash 
@@ -56,5 +60,5 @@ python eel_app.py
 
 ## Roadmap:
  - ### Better FrontEnd
- - ### Standalone Package with PyInstaller
+ - ### Standalone Package for Linux
  
