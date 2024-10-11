@@ -13,6 +13,11 @@
  - ### System Message
    - Specify it at the beginning of the session.
 
+## GUI
+   [!Alt text](https://imagedelivery.net/YCQ3OFRYiR1R_AeUslNHiw/229bd304-f38b-4df5-d19a-bf80bb8d2500/GitHubBanner)
+   
+   - Python backend and HTML/CSS/JS Frontend using [Eel](https://github.com/python-eel/Eel) library.
+
 ## Implemented Models :
   - ### gpt-4o
   - ### gpt-4o-mini
@@ -22,9 +27,34 @@
 
 ## OpenAI API Key: 
 
-### The user's OpenAI API Key is read locally from a `.env` file using the `dotenv` python library. In the .env file, the key should be specified by assigning it to a variable called `OPENAI_API_KEY`.
-### There is also the option to manually specify the key as an argument to the `GptModel` class.
+### The user's OpenAI API Key is read locally from a `.env` file using the `python-dotenv` library. In the .env file, the key should be specified by assigning it to a variable called `OPENAI_API_KEY`.
+
+## Setup
+
+### 1. Clone this repo
+```bash 
+git clone https://github.com/svdC1/PyGptInterface
+```
+
+### 2. Install requirements
+ - ### Wrapper + GUI (Eel)
+ ```bash
+ pip install -r requirements.txt
+ ```
+ - ### Wrapper Only
+```bash
+pip install -r requeriments-wrapper.txt
+```
+
+## Run GUI
+
+### After setting up
+```bash
+python eel_app.py
+```
+
 
 ## Roadmap:
-### Implement a GUI for ease of use.
+ - ### Better FrontEnd
+ - ### Standalone Package with PyInstaller
  

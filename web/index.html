@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyGptInterface</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- Start eel (Python Backend) -->
+  <script type="text/javascript" src="/eel.js"></script>
+  <!-- Load marked.js (Markdown renderer lib) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@4.0.10/marked.min.js"></script>
+  <!-- Load index.js-->
+  <script src="index.js"></script>
+  <script src="nav.js"></script>
+</head>
+
+<body>
+  <div id="Sidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <!-- Settings Form-->
+    <div id="SettingsFormContainer" class='form-container'>
+      <h2>Model</h2>
+      <select id="model_select">
+        <option value="gpt-4o-mini">gpt-4o-mini</option>
+        <option value="gpt-4o">gpt-4o</option>
+        <option value="gpt-4-turbo">gpt-4-turbo</option>
+        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+      </select>
+      <h2>System Message</h2>
+      <textarea id="system_message" autocomplete="off" rows="5" cols="15">You are a helpful assistant.</textarea>
+      <h2 id="slider-value">Max Context:</h2>
+      <input type="range" min=100 max="1000000" step=100 value="100000" id="max_context" oninput="updateSliderValue()"/>
+      <button id="apply_button" role="button" onclick="changeSettings()">Submit</button>
+    </div>
+  </div>
+  <div id="SidenavInfo" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNavInfo()">&times;</a>
+    <a>Current Session : </a>
+    <div id="SessionInfoContainer" class="info-container">
+      <!--Info added with js-->
+    </div>
+  </div>
+  <div id="SidenavSessions" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNavSessions()">&times;</a>
+    <a>Sessions:</a>
+    <br>
+    <div id="SessionsContainer" class="sessions-container">
+      <select id="sessionSelector">
+        <!-- Sessions added with js-->
+      </select>
+      <br>
+      <button id="show_session_button" role="button" onclick="displaySelectedSession()">Show</button>
+      <!-- Sessions Info added with js-->
+    </div>
+    <br>
+    <div id="SelectedSessionContainer" class='selected-session-container'>
+      <!--Selected Session Info added with js-->
+    </div>
+  </div>
+  <div class="model-text">
+
+    <button class="openbtn" role="button" onclick="openNav()">Settings</button>
+    <button class="openbtn" role="button" onclick='openNavInfo();fetchSessionInfo()'>Info</button>
+    <button class="openbtn" role="button" onclick='refreshSession()'>Refresh Session</button>
+    <button class="openbtn" role="button" onclick='openNavSessions();populateSessionSelector()'>View Sessions</button>
+
+  </div>
+  <div class="chat-container">
+    <!-- Messages Display Area -->
+    <div id="chat-box" class="chat-box">
+      <!-- Chat messages will be dynamically added here using JavaScript -->
+    </div>
+
+    <!-- Input Area -->
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off">
+      <button id="send-button" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <!-- Success Toast Message -->
+  <div id="toast" class="toast"></div>
+  <!-- Error Toast Message -->
+  <div id="toastError" class="toastError"></div>
+
+</body>
+
+</html>

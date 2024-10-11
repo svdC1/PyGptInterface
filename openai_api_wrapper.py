@@ -31,6 +31,8 @@ class GptModel:
         try:
             if from_dotenv:
                 key = dotenv_values('.env')['OPENAI_API_KEY']
+                self.ApiKey = key
+                ApiKey = self.ApiKey
             elif ApiKey is not None:
                 key = ApiKey
             else:
@@ -198,3 +200,62 @@ class GptModel:
         self.output_tokens = None
         self.requests_info = []
         GptModel.logger.info('Session Cleared!')
+
+    @staticmethod
+    def load_from_dict(info: dict):
+        keys = ['model',
+                'sys_msg',
+                'max_context',
+                'messages',
+                'outputs',
+                'inputs',
+                'total_price',
+                'total_tokens',
+                'input_tokens',
+                'request_count',
+                'output_tokens',
+                'requests_info',
+                'sessions_info',
+                'text_finishin_reasons'
+                ]
+        gpt_model = GptModel('gpt-4o-mini')
+        for key in info.keys():
+            if key not in keys:
+                raise Exception(f"Error loading from dict: {key} not found.")
+        fmt_sys_msg = {"role": "system", "content": info['sys_msg']}
+        gpt_model.raw_sys_msg = info['sys_msg']
+        gpt_model.from_dotenv = True
+        gpt_model.ApiKey = dotenv_values('.env')['OPENAI_API_KEY']
+        gpt_model.sys_msg = fmt_sys_msg
+        gpt_model.window_token_limit = info['max_context']
+        gpt_model.messages = info['messages']
+        gpt_model.outputs = info['outputs']
+        gpt_model.inputs = info['inputs']
+        gpt_model.total_price = info['total_price']
+        gpt_model.total_tokens = info['total_tokens']
+        gpt_model.input_tokens = info['input_tokens']
+        gpt_model.request_count = info['request_count']
+        gpt_model.output_tokens = info['output_tokens']
+        gpt_model.requests_info = info['requests_info']
+        gpt_model.sessions_info = info['sessions_info']
+        gpt_model.text_finishin_reasons = info['text_finishin_reasons']
+        gpt_model.client = OpenAI(api_key=gpt_model.ApiKey)
+        return gpt_model
+
+    def serialize(self):
+        d = {'model': self.model,
+             'sys_msg': self.raw_sys_msg,
+             'max_context': self.window_token_limit,
+             'messages': self.messages,
+             'outputs': self.outputs,
+             'inputs': self.inputs,
+             'total_price': self.total_price,
+             'total_tokens': self.total_tokens,
+             'input_tokens': self.input_tokens,
+             'request_count': self.request_count,
+             'output_tokens': self.output_tokens,
+             'requests_info': self.requests_info,
+             'sessions_info': self.sessions_info,
+             'text_finishin_reasons': self.text_finishin_reasons
+             }
+        return d
