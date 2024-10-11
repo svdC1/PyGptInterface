@@ -1,7 +1,7 @@
 import eel
 import logging
-from openai_api_wrapper import GptModel
-from dotenv import dotenv_values
+import openai_api_wrapper
+import dotenv
 import time
 
 
@@ -31,24 +31,24 @@ def setup_model(version: str = None, system_msg: str = 'default',
 
     if ApiKey is None:
         try:
-            ApiKey = dotenv_values('.env')['OPENAI_API_KEY']
+            ApiKey = dotenv.dotenv_values('.env')['OPENAI_API_KEY']
         except KeyError:
             logging.error("Could not find 'OPENAI_API_KEY' in .env file!")
             return "Error when loading model! Please check console."
 
         try:
-            gpt_model = GptModel(version, system_msg,
-                                 False, ApiKey,
-                                 max_context)
+            gpt_model = openai_api_wrapper.GptModel(version, system_msg,
+                                                    False, ApiKey,
+                                                    max_context)
             return gpt_model.serialize()
         except Exception as e:
             logging.error(f"Error when loading model: {str(e)}")
             return "Error when loading model! Please check console."
     else:
         try:
-            gpt_model = GptModel(version, system_msg,
-                                 False, ApiKey,
-                                 max_context)
+            gpt_model = openai_api_wrapper.GptModel(version, system_msg,
+                                                    False, ApiKey,
+                                                    max_context)
             return gpt_model.serialize()
         except Exception as e:
             logging.error(f"Error when loading model: {str(e)}")
@@ -60,7 +60,7 @@ def process_message(message: str, model_dict: dict):
     logging.info(f"Received prompt: {message}")
     logging.info("Received Model JSON:See browser console to check contents.")
     logging.info("Loading Instance...")
-    gpt_model = GptModel.load_from_dict(model_dict)
+    gpt_model = openai_api_wrapper.GptModel.load_from_dict(model_dict)
     logging.info("Processing Request...")
     s = time.time()
     response = gpt_model.request(message)
@@ -78,7 +78,7 @@ def process_message(message: str, model_dict: dict):
 def get_info(model_dict: dict):
     logging.info("Received Info Request")
     logging.info("Initializing Model Instance...")
-    gpt_model = GptModel.load_from_dict(model_dict)
+    gpt_model = openai_api_wrapper.GptModel.load_from_dict(model_dict)
     info_dict = {'messages': gpt_model.messages,
                  'inputs': gpt_model.inputs,
                  'outputs': gpt_model.outputs,
@@ -98,7 +98,7 @@ def get_info(model_dict: dict):
 def refresh_session(model_dict: dict):
     logging.info("Received Request to Refresh Session")
     logging.info("Initializing Model Instance...")
-    gpt_model = GptModel.load_from_dict(model_dict)
+    gpt_model = openai_api_wrapper.GptModel.load_from_dict(model_dict)
     gpt_model.new_session()
     logging.info("Session Refreshed")
     return {'session_info': gpt_model.sessions_info[-1],
@@ -109,7 +109,7 @@ def refresh_session(model_dict: dict):
 def change_sys_msg(sys_msg: str, model_dict: dict):
     logging.info("Received Request to change system message")
     logging.info("Initializing Model Instance...")
-    gpt_model = GptModel.load_from_dict(model_dict)
+    gpt_model = openai_api_wrapper.GptModel.load_from_dict(model_dict)
     gpt_model.sys_msg = {'role': 'system', 'content': sys_msg}
     prev_session = refresh_session(gpt_model)
     logging.info("System Message was changed")
