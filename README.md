@@ -4,7 +4,7 @@
 
 ## Functionalities : 
  - ### Session Cost Tracking
-   - Calcualates OpenAI's API usage cost of the activate session based on the latest prices provided by OpenAI for each model by keeping track of the total input and output tokens.
+   - Calcualates OpenAI's API usage cost of the active session based on the latest prices provided by OpenAI for each model by keeping track of the total input and output tokens.
   
  - ### Finish Reason Tracking
    - Stores each one of the session's prompt finish reasons in case a message is returned incomplete or is not returned. The finish reasons are stored containing the information returned (e.g Incomplete message due to Content Filtering, A function was called, Complete output, ...)
