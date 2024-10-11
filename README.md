@@ -33,7 +33,7 @@
 
 ### 1. Clone this repo
 ```bash 
-git clone https://github.com/svdC1/PyGptInterface
+git clone https://github.com/svdC1/PyGptInterface.git
 ```
 
 ### 2. Install requirements
