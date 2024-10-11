@@ -14,7 +14,7 @@
    - Specify it at the beginning of the session.
 
 ## GUI
-   [!Alt text](https://imagedelivery.net/YCQ3OFRYiR1R_AeUslNHiw/229bd304-f38b-4df5-d19a-bf80bb8d2500/GitHubBanner)
+   ![Alt text](https://imagedelivery.net/YCQ3OFRYiR1R_AeUslNHiw/229bd304-f38b-4df5-d19a-bf80bb8d2500/GitHubBanner)
    
    - Python backend and HTML/CSS/JS Frontend using [Eel](https://github.com/python-eel/Eel) library.
 
